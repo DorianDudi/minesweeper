@@ -119,144 +119,144 @@ function generate_game() {	//populates game matrix with values 1 to 9 (9 being t
 
 function fill_cleared_cells(x, y) {
 	let limit_up = 0;
-    for (let i = x - 1, j = y; !limit_up && i > 0; --i) {
-        let currentID = "" + i + j;
-        if (document.getElementById(currentID).classList.contains('cell_unclicked') && game_matrix[i][j] < 9) {
-        	document.getElementById(currentID).classList.replace('cell_unclicked', 'cell_clicked');
-        	if (game_matrix[i][j] > 0) {
-            	document.getElementById(currentID).innerHTML = "<p>" + game_matrix[i][j] + "</p>";
-            	limit_up = 1;    
-            } else {
-            	fill_cleared_cells(i, j);
-            }
-        } else {
-        	limit_up = 1;
-        }
-    }
-    let limit_down = 0;
-    for (let i = x + 1, j = y; !limit_down && i < 10; ++i) {
-        let currentID = "" + i + j;
-        if (document.getElementById(currentID).classList.contains('cell_unclicked') && game_matrix[i][j] < 9) {
-        	document.getElementById(currentID).classList.replace('cell_unclicked', 'cell_clicked');
-        	if (game_matrix[i][j] > 0) {
-            	document.getElementById(currentID).innerHTML = "<p>" + game_matrix[i][j] + "</p>";
-                limit_down = 1;
-            } else {
-            	fill_cleared_cells(i, j);
-            }
-        } else {
-        	limit_down = 1;
-        }
-    }
-   	let limit_left = 0;
-    for (let i = x, j = y - 1; !limit_left && j > 0; --j) {
-        let currentID = "" + i + j;
-        if (document.getElementById(currentID).classList.contains('cell_unclicked') && game_matrix[i][j] < 9) {
-        	document.getElementById(currentID).classList.replace('cell_unclicked', 'cell_clicked');
-        	if (game_matrix[i][j] > 0) {
-            	document.getElementById(currentID).innerHTML = "<p>" + game_matrix[i][j] + "</p>";
-                limit_left = 1;
-            } else {
-            	fill_cleared_cells(i, j);
-            }
-        } else {
-        	limit_left = 1;
-        }
-    }
-   let limit_right = 0;
-   for (let i = x, j = y + 1; !limit_right && j < 10; ++j) {
-        let currentID = "" + i + j;
-        if (document.getElementById(currentID).classList.contains('cell_unclicked') && game_matrix[i][j] < 9) {
-        	document.getElementById(currentID).classList.replace('cell_unclicked', 'cell_clicked');
-        	if (game_matrix[i][j] > 0) {
-            	document.getElementById(currentID).innerHTML = "<p>" + game_matrix[i][j] + "</p>";
-                limit_right = 1;
-            } else {
-            	fill_cleared_cells(i, j);
-            }
-        } else {
-        	limit_right = 1;
-        }
-    }
+	for (let i = x - 1, j = y; !limit_up && i > 0; --i) {
+		let currentID = "" + i + j;
+		if (document.getElementById(currentID).classList.contains('cell_unclicked') && game_matrix[i][j] < 9) {
+			document.getElementById(currentID).classList.replace('cell_unclicked', 'cell_clicked');
+			if (game_matrix[i][j] > 0) {
+				document.getElementById(currentID).innerHTML = "<p>" + game_matrix[i][j] + "</p>";
+				limit_up = 1;    
+			} else {
+				fill_cleared_cells(i, j);
+			}
+		} else {
+			limit_up = 1;
+		}
+	}
+	let limit_down = 0;
+	for (let i = x + 1, j = y; !limit_down && i < 10; ++i) {
+		let currentID = "" + i + j;
+		if (document.getElementById(currentID).classList.contains('cell_unclicked') && game_matrix[i][j] < 9) {
+			document.getElementById(currentID).classList.replace('cell_unclicked', 'cell_clicked');
+			if (game_matrix[i][j] > 0) {
+				document.getElementById(currentID).innerHTML = "<p>" + game_matrix[i][j] + "</p>";
+				limit_down = 1;
+			} else {
+				fill_cleared_cells(i, j);
+			}
+		} else {
+			limit_down = 1;
+		}
+	}
+	let limit_left = 0;
+	for (let i = x, j = y - 1; !limit_left && j > 0; --j) {
+		let currentID = "" + i + j;
+		if (document.getElementById(currentID).classList.contains('cell_unclicked') && game_matrix[i][j] < 9) {
+			document.getElementById(currentID).classList.replace('cell_unclicked', 'cell_clicked');
+			if (game_matrix[i][j] > 0) {
+				document.getElementById(currentID).innerHTML = "<p>" + game_matrix[i][j] + "</p>";
+				limit_left = 1;
+			} else {
+				fill_cleared_cells(i, j);
+			}
+		} else {
+			limit_left = 1;
+		}
+	}
+	let limit_right = 0;
+	for (let i = x, j = y + 1; !limit_right && j < 10; ++j) {
+		let currentID = "" + i + j;
+		if (document.getElementById(currentID).classList.contains('cell_unclicked') && game_matrix[i][j] < 9) {
+			document.getElementById(currentID).classList.replace('cell_unclicked', 'cell_clicked');
+			if (game_matrix[i][j] > 0) {
+				document.getElementById(currentID).innerHTML = "<p>" + game_matrix[i][j] + "</p>";
+				limit_right = 1;
+			} else {
+				fill_cleared_cells(i, j);
+				}
+		} else {
+			limit_right = 1;
+		}
+	}
 }
 
 function display_adjacents_of(x, y) {  // displays the 3x3 submatrix that has the cell of x,y coordinates at it's center
 	for (let i = x - 1; i <= x + 1; ++i) {
 		for (let j = y - 1; j <= y + 1; ++j) {
-    		if (i != 0 && j != 0 && i != 10 && j != 10) { //  if coordinates are not out of bounds
-            	let currentID = "" + i + j;
-                document.getElementById(currentID).classList.replace('cell_unclicked', 'cell_clicked');
-                if (game_matrix[i][j] > 0) {
-            		document.getElementById(currentID).innerHTML = "<p>" + game_matrix[i][j] + "</p>";
-                }
-            }
-    	}
-    }
+			if (i != 0 && j != 0 && i != 10 && j != 10) { //  if coordinates are not out of bounds
+				let currentID = "" + i + j;
+				document.getElementById(currentID).classList.replace('cell_unclicked', 'cell_clicked');
+				if (game_matrix[i][j] > 0) {
+					document.getElementById(currentID).innerHTML = "<p>" + game_matrix[i][j] + "</p>";
+				}
+			}
+		}
+	}
 }
 
 function reveal_corners() { // auxiliary function used by fill_cleared_cells() that handles the corners of the filled area
 	for (let i = 1; i < 10; ++i) {
-        for (let j = 1; j < 10; ++j) {
-            if (game_matrix[i][j] == 0) {
-                let currentID = "" + i + j;
-                if (document.getElementById(currentID).classList.contains('cell_clicked')) {
-                    display_adjacents_of(i, j);
-                }
-            }
-        }
-    }
+		for (let j = 1; j < 10; ++j) {
+			if (game_matrix[i][j] == 0) {
+				let currentID = "" + i + j;
+				if (document.getElementById(currentID).classList.contains('cell_clicked')) {
+					display_adjacents_of(i, j);
+				}
+			}
+		}
+	}
 }
 
 function grid_freeze(state) { // disables all cells if argument is 1 or activates them when argument is 0
 	for (let i = 1; i <= 9; ++i) {
-    	for (let j = 1; j <= 9; ++j) {
-        let elemID = "" + i + j;
-        	if (state == 1) {
-            	document.getElementById(elemID).removeAttribute("onclick");		
-            } else {
-            	document.getElementById(elemID).setAttribute("onclick", "reveal_cell(this.id)");
-            }	
-        }
-    }
+		for (let j = 1; j <= 9; ++j) {
+			let elemID = "" + i + j;
+			if (state == 1) {
+				document.getElementById(elemID).removeAttribute("onclick");		
+			} else {
+				document.getElementById(elemID).setAttribute("onclick", "reveal_cell(this.id)");
+			}
+		}
+	}
 }
 
 function game_over(user_won) { // changes icon at game over
 	document.getElementById("game_on").hidden = true;	
 	if (user_won) {
-    	document.getElementById("winner").hidden = false;
-    } else {
-    	document.getElementById("game_over").hidden = false;
-        for (let i = 1; i <= 9; ++i) {
-    		for (let j = 1; j <= 9; ++j) {
-        		let elemID = "" + i + j;
-        		if (game_matrix[i][j] == 9) {
-            		document.getElementById(elemID).classList.replace('cell_unclicked', 'cell_clicked');
-                    document.getElementById(elemID).innerHTML = '<img src="https://iili.io/HoDm1Og.png" border="0" width="38" height="38" />';
-            	}
-        	}
-    	}
-    }
-    grid_freeze(1);
+		document.getElementById("winner").hidden = false;
+	} else {
+		document.getElementById("game_over").hidden = false;
+		for (let i = 1; i <= 9; ++i) {
+			for (let j = 1; j <= 9; ++j) {
+				let elemID = "" + i + j;
+				if (game_matrix[i][j] == 9) {
+					document.getElementById(elemID).classList.replace('cell_unclicked', 'cell_clicked');
+					document.getElementById(elemID).innerHTML = '<img src="https://iili.io/HoDm1Og.png" border="0" width="38" height="38" />';
+				}
+			}
+		}
+	}
+	grid_freeze(1);
 } 
 
 function restart_game() { // resets the HTML and adds new values in the matrices
 	grid_freeze(0);
 	generate_mine_coordinates();
-    initialize_game_matrix();
+	initialize_game_matrix();
 	generate_game();
 	console.table(mine_coordinates);
 	console.table(game_matrix);
-    document.getElementById("game_over").hidden = true;
+	document.getElementById("game_over").hidden = true;
 	document.getElementById("winner").hidden = true;
-    document.getElementById("game_on").hidden = false;
-    for (let i = 1; i <= 9; ++i) {
-    	for (let j = 1; j <= 9; ++j) {
-        let elemID = "" + i + j;
-        	document.getElementById(elemID).classList.replace('cell_clicked', 'cell_unclicked');
-            document.getElementById(elemID).innerHTML = "";
-        }
-    }
-} 
+	document.getElementById("game_on").hidden = false;
+	for (let i = 1; i <= 9; ++i) {
+		for (let j = 1; j <= 9; ++j) {
+			let elemID = "" + i + j;
+			document.getElementById(elemID).classList.replace('cell_clicked', 'cell_unclicked');
+			document.getElementById(elemID).innerHTML = "";
+		}
+	}
+}
 
 document.addEventListener('contextmenu', event => event.preventDefault()); // disables context menu
 generate_mine_coordinates();
