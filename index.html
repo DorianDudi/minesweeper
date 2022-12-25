@@ -7,17 +7,17 @@
 		<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 	</head>
 	<body>
-        <h1>MINESWEEPER</h1>
-        <h2>Clear all the cells by avoiding the 10 mines.</h2>
-        <br>
-        <h2>Click the icon below to reset game.</h2>
-        <br>
-        <div class="cell_unclicked">
-            <img src="https://iili.io/Hxawbl2.png" onclick="restart_game()" border="0" width="32" height="32" id="game_on"/>
-            <img src="https://iili.io/HxawZP4.png" onclick="restart_game()" border="0" width="32" height="32" id="game_over" hidden/>
-            <img src="https://iili.io/HxawDKl.png" onclick="restart_game()" border="0" width="32" height="32" id="winner" hidden/>
-        </div>
-        <br>
+		<h1>MINESWEEPER</h1>
+		<h2>Clear all the cells by avoiding the 10 mines.</h2>
+		<br>
+		<h2>Click the icon below to reset game.</h2>
+		<br>
+		<div class="cell_unclicked">
+		    <img src="https://iili.io/Hxawbl2.png" onclick="restart_game()" border="0" width="32" height="32" id="game_on"/>
+		    <img src="https://iili.io/HxawZP4.png" onclick="restart_game()" border="0" width="32" height="32" id="game_over" hidden/>
+		    <img src="https://iili.io/HxawDKl.png" onclick="restart_game()" border="0" width="32" height="32" id="winner" hidden/>
+		</div>
+		<br>
 		<div id="game_grid">
 			<div class="cell_unclicked" onclick="reveal_cell(this.id)" id="11"></div>
 			<div class="cell_unclicked" onclick="reveal_cell(this.id)" id="12"></div>
