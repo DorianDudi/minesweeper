@@ -96,25 +96,25 @@ function generate_mine_coordinates() {	// populates mine coordinate matrix with 
 }
 
 function generate_game() {	//populates game matrix with values 1 to 9 (9 being the mines and 1 to 8 are neighbouring values)
-    for (let i = 0; i < 10; ++i) {
-    	let x = mine_coordinates[0][i], y = mine_coordinates[1][i];
-        game_matrix[x][y] = 9;
-    }
-    for (let i = 1; i <= 9; ++i) {
-        for (let j = 1; j <= 9; ++j) {
+	for (let i = 0; i < 10; ++i) {
+		let x = mine_coordinates[0][i], y = mine_coordinates[1][i];
+		game_matrix[x][y] = 9;
+	}
+	for (let i = 1; i <= 9; ++i) {
+		for (let j = 1; j <= 9; ++j) {
 			if (game_matrix[i][j] != 9) {
-            	let cell_value = 0;
-                for (let x = i - 1; x <= i + 1; ++x) {
-                	for (let y = j - 1; y <= j + 1; ++y) {
-                		if (game_matrix[x][y] == 9) {
-                        	++cell_value;
-                        }
-                	}
-                }
-                game_matrix[i][j] = cell_value;
-            }
-        }
-    }
+				let cell_value = 0;
+				for (let x = i - 1; x <= i + 1; ++x) {
+					for (let y = j - 1; y <= j + 1; ++y) {
+						if (game_matrix[x][y] == 9) {
+							++cell_value;
+						}
+					}
+				}
+				game_matrix[i][j] = cell_value;
+			}
+		}
+	}
 }
 
 function fill_cleared_cells(x, y) {
