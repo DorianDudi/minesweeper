@@ -4,29 +4,27 @@
 // MINED CELL = 9
 
 let game_matrix = [];
-initialize_game_matrix();
+
+for (let i = 0; i <= 10; i++) {
+	game_matrix[i] = [];
+	for (let j = 0; j <= 10; j++) {
+	    game_matrix[i][j] = 0;
+	}
+}	
+
 let mine_coordinates = [];
 for (let i = 0; i <= 1; i++) {
-    mine_coordinates[i] = [];
-    for (let j = 0; j < 10; j++) {
-        mine_coordinates[i][j] = 0;
-    }
-}
-
-function initialize_game_matrix() {
-    for (let i = 0; i <= 10; i++) {
-        game_matrix[i] = [];
-        for (let j = 0; j <= 10; j++) {
-            game_matrix[i][j] = 0;
-        }
-    }
-}	// the above code declares and initializes the game matrix and the coordinate matrix
+	mine_coordinates[i] = [];
+	for (let j = 0; j < 10; j++) {
+		mine_coordinates[i][j] = 0;
+	}
+} // the above code declares and initializes the game matrix and the coordinate matrix
 
 function toggle_flag(divID) {	// toggles flag on right clik - disables flagged cell
 	if (document.getElementById(divID).classList.contains('cell_unclicked')) {
-		if(document.getElementById(divID).innerHTML != '') {
+		if(document.getElementById(divID).innerHTML != '') { // if has flag
 			document.getElementById(divID).innerHTML = '';
-			if (!user_wins) {
+			if (document.getElementById("game_over").hasAttribute("hidden")) {
 				document.getElementById(divID).setAttribute("onclick", "reveal_cell(this.id)");
 			}
 		} else {
@@ -57,7 +55,7 @@ function reveal_cell(elem_id) {		// reveals contents of clicked cells by calling
 	let x = parseInt(elem_id[0]), y = parseInt(elem_id[1]), cell_value = game_matrix[x][y];
 	if (cell_value > 0) {
 		update_HTML_ID(x, y, cell_value);
-	} else {				// also calls the flood-fill function if cell has value of 0
+	} else {
 		fill_cleared_cells(x, y);
 		reveal_corners();
 	}
@@ -118,64 +116,67 @@ function generate_game() {	//populates game matrix with values 1 to 9 (9 being t
 }
 
 function fill_cleared_cells(x, y) {
-	let limit_up = 0;
-	for (let i = x - 1, j = y; !limit_up && i > 0; --i) {
-		let currentID = "" + i + j;
-		if (document.getElementById(currentID).classList.contains('cell_unclicked') && game_matrix[i][j] < 9) {
-			document.getElementById(currentID).classList.replace('cell_unclicked', 'cell_clicked');
-			if (game_matrix[i][j] > 0) {
-				document.getElementById(currentID).innerHTML = "<p>" + game_matrix[i][j] + "</p>";
-				limit_up = 1;    
-			} else {
-				fill_cleared_cells(i, j);
-			}
-		} else {
-			limit_up = 1;
-		}
-	}
-	let limit_down = 0;
-	for (let i = x + 1, j = y; !limit_down && i < 10; ++i) {
-		let currentID = "" + i + j;
-		if (document.getElementById(currentID).classList.contains('cell_unclicked') && game_matrix[i][j] < 9) {
-			document.getElementById(currentID).classList.replace('cell_unclicked', 'cell_clicked');
-			if (game_matrix[i][j] > 0) {
-				document.getElementById(currentID).innerHTML = "<p>" + game_matrix[i][j] + "</p>";
-				limit_down = 1;
-			} else {
-				fill_cleared_cells(i, j);
-			}
-		} else {
-			limit_down = 1;
-		}
-	}
-	let limit_left = 0;
-	for (let i = x, j = y - 1; !limit_left && j > 0; --j) {
-		let currentID = "" + i + j;
-		if (document.getElementById(currentID).classList.contains('cell_unclicked') && game_matrix[i][j] < 9) {
-			document.getElementById(currentID).classList.replace('cell_unclicked', 'cell_clicked');
-			if (game_matrix[i][j] > 0) {
-				document.getElementById(currentID).innerHTML = "<p>" + game_matrix[i][j] + "</p>";
-				limit_left = 1;
-			} else {
-				fill_cleared_cells(i, j);
-			}
-		} else {
-			limit_left = 1;
-		}
-	}
-	let limit_right = 0;
-	for (let i = x, j = y + 1; !limit_right && j < 10; ++j) {
-		let currentID = "" + i + j;
-		if (document.getElementById(currentID).classList.contains('cell_unclicked') && game_matrix[i][j] < 9) {
-			document.getElementById(currentID).classList.replace('cell_unclicked', 'cell_clicked');
-			if (game_matrix[i][j] > 0) {
-				document.getElementById(currentID).innerHTML = "<p>" + game_matrix[i][j] + "</p>";
-				limit_right = 1;
-			} else {
-				fill_cleared_cells(i, j);
+	let limit_up = 0, limit_down = 0, limit_left = 0, limit_right = 0;
+	for (let i = 1; i <= 8; ++i) {
+		if (!limit_up && x - i > 0) {
+        	let ID_up = "" + (x - i) + y;
+			if (document.getElementById(ID_up).classList.contains('cell_unclicked') && game_matrix[x - i][y] < 9) { //condition new cell not mined
+				document.getElementById(ID_up).classList.replace('cell_unclicked', 'cell_clicked');	// changes style
+				if (game_matrix[x - i][y] > 0) {
+					document.getElementById(ID_up).innerHTML = "<p>" + game_matrix[x - i][y] + "</p>";  // mine near: display number, set limit
+					limit_up = 1;
+				} else {	// run flood-fill again on empty cell
+                	document.getElementById(ID_up).innerHTML = ''; // clears flag
+					fill_cleared_cells(x - i, y);
 				}
-		} else {
-			limit_right = 1;
+			} else {
+				limit_up = 1;
+			}
+		}
+		if (!limit_down && x + i < 10) {
+        	let ID_down = "" + (x + i) + y;
+			if (document.getElementById(ID_down).classList.contains('cell_unclicked') && game_matrix[x + i][y] < 9) {
+				document.getElementById(ID_down).classList.replace('cell_unclicked', 'cell_clicked');
+				if (game_matrix[x + i][y] > 0) {
+					document.getElementById(ID_down).innerHTML = "<p>" + game_matrix[x + i][y] + "</p>";
+					limit_down = 1;
+				} else {
+                	document.getElementById(ID_down).innerHTML = '';
+					fill_cleared_cells(x + i, y);
+				}
+			} else {
+				limit_down = 1;
+			}
+        }
+		if (!limit_left && y - i > 0) {
+        	let ID_left = "" + x + (y - i);
+			if (document.getElementById(ID_left).classList.contains('cell_unclicked') && game_matrix[x][y - i] < 9) {
+				document.getElementById(ID_left).classList.replace('cell_unclicked', 'cell_clicked');
+				if (game_matrix[x][y - i] > 0) {
+					document.getElementById(ID_left).innerHTML = "<p>" + game_matrix[x][y - i] + "</p>";
+					limit_left = 1;
+				} else {
+                	document.getElementById(ID_left).innerHTML = '';
+					fill_cleared_cells(x, y - i);
+				}
+			} else {
+				limit_left = 1;
+			}
+		}
+		if (!limit_right && y + i < 10) {
+        	let ID_right = "" + x + (y + i);
+			if (document.getElementById(ID_right).classList.contains('cell_unclicked') && game_matrix[x][y + i] < 9) {
+				document.getElementById(ID_right).classList.replace('cell_unclicked', 'cell_clicked');
+				if (game_matrix[x][y + i] > 0) {
+					document.getElementById(ID_right).innerHTML = "<p>" + game_matrix[x][y + i] + "</p>";
+					limit_right  = 1;
+				} else {
+                	document.getElementById(ID_right).innerHTML = '';
+					fill_cleared_cells(x, y + i);
+				}
+			} else {
+				limit_right = 1;
+			}
 		}
 	}
 }
