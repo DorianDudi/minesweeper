@@ -4,19 +4,23 @@
 // MINED CELL = 9
 
 let game_matrix = [];
-for (let i = 0; i <= 10; i++) {
-	game_matrix[i] = [];
-	for (let j = 0; j <= 10; j++) {
-	    game_matrix[i][j] = 0;
-	}
-}	
+
+initialize_game_matrix();
 let mine_coordinates = [];
 for (let i = 0; i <= 1; i++) {
 	mine_coordinates[i] = [];
 	for (let j = 0; j < 10; j++) {
 		mine_coordinates[i][j] = 0;
 	}
-} // the above code declares and initializes the game matrix and the coordinate matrix
+}
+function initialize_game_matrix() {
+	for (let i = 0; i <= 10; i++) {
+		game_matrix[i] = [];
+		for (let j = 0; j <= 10; j++) {
+			game_matrix[i][j] = 0;
+		}
+	}
+}	// the above code declares and initializes the game matrix and the coordinate matrix
 
 function toggle_flag(divID) {	// toggles flag on right clik - disables flagged cell
 	if (document.getElementById(divID).classList.contains('cell_unclicked')) {
@@ -241,6 +245,7 @@ function game_over(user_won) { // changes icon at game over
 function restart_game() { // resets the HTML and adds new values in the matrices
 	grid_freeze(0);
 	generate_mine_coordinates();
+	initialize_game_matrix();
 	generate_game();
 	console.table(mine_coordinates);
 	console.table(game_matrix);
