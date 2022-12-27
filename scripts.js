@@ -126,7 +126,7 @@ function fill_cleared_cells(x, y) {
 					document.getElementById(ID_up).innerHTML = "<p>" + game_matrix[x - i][y] + "</p>";  // mine near: display number, set limit
 					limit_up = 1;
 				} else {	// run flood-fill again on empty cell
-                	document.getElementById(ID_up).innerHTML = ''; // clears flag
+					document.getElementById(ID_up).innerHTML = ''; // clears flag
 					fill_cleared_cells(x - i, y);
 				}
 			} else {
@@ -141,13 +141,13 @@ function fill_cleared_cells(x, y) {
 					document.getElementById(ID_down).innerHTML = "<p>" + game_matrix[x + i][y] + "</p>";
 					limit_down = 1;
 				} else {
-                	document.getElementById(ID_down).innerHTML = '';
+					document.getElementById(ID_down).innerHTML = '';
 					fill_cleared_cells(x + i, y);
 				}
 			} else {
 				limit_down = 1;
 			}
-        }
+		}
 		if (!limit_left && y - i > 0) {
         	let ID_left = "" + x + (y - i);
 			if (document.getElementById(ID_left).classList.contains('cell_unclicked') && game_matrix[x][y - i] < 9) {
