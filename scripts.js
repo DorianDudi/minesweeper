@@ -67,7 +67,7 @@ function toggle_flag(divID) {	// toggles flag on right clik - disables flagged c
 	if (document.getElementById(divID).classList.contains('cell_unclicked')) {
 		if(document.getElementById(divID).innerHTML != '') { // if has flag
 			document.getElementById(divID).innerHTML = '';
-			if (document.getElementById("game_over").hasAttribute("hidden")) {
+			if (!document.getElementById("game_on").hasAttribute("hidden")) {
 				document.getElementById(divID).setAttribute("onclick", "reveal_cell(this.id)");
 			}
 		} else {
