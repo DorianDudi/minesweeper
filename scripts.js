@@ -135,15 +135,14 @@ function user_wins() {	// checks if all empty cells have been cleared
 }
 
 function fill_cleared_cells(x, y) {
-	//let limit_up = 0, limit_down = 0, limit_left = 0, limit_right = 0;
-    let directions = [0, 0, 0, 0]; // up down left right
+	let directions = [0, 0, 0, 0]; // up down left right
 	for (let i = 1; i <= 8; ++i) {
 		if (directions[0] == 0 && x - i > 0) { 
 			fill_cell(x - i, y, directions, 0);
 		}
 		if (directions[1] == 0 && x + i < 10) { 
 			fill_cell(x + i, y, directions, 1);
-        }
+		}
 		if (directions[2] == 0 && y - i > 0) {
 			fill_cell(x, y - i, directions, 2);
 		}
@@ -160,8 +159,8 @@ function fill_cell(a, b, dir_array, dir) { // coords. x and y the "directions" m
 		if (game_matrix[a][b] > 0) {
 			document.getElementById(ID_html).innerHTML = "<p>" + game_matrix[a][b] + "</p>";  // mine near: display number, set limit
 			dir_array[dir] = 1;
-            console.table(dir_array);
-		} else {	// run flood-fill again on empty cell
+			console.table(dir_array);
+		} else {// run flood-fill again on empty cell
 			document.getElementById(ID_html).innerHTML = ''; // clears flag 
 			fill_cleared_cells(a, b);
 		}
