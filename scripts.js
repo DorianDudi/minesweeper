@@ -135,21 +135,19 @@ function user_wins() {	// checks if all empty cells have been cleared
 }
 
 function fill_cleared_cells(x, y) {
-	let directions = [0, 0, 0, 0]; // up down left right
+	let directions_arr = [0, 0, 0, 0]; // up down left right
 	for (let i = 1; i <= 8; ++i) {
-		if (directions[0] == 0 && x - i > 0) { 
-			fill_cell(x - i, y, directions, 0);
-		}
-		if (directions[1] == 0 && x + i < 10) { 
-			fill_cell(x + i, y, directions, 1);
-		}
-		if (directions[2] == 0 && y - i > 0) {
-			fill_cell(x, y - i, directions, 2);
-		}
-		if (directions[3] == 0 && y + i < 10) {
-			fill_cell(x, y + i, directions, 3);
-		}
+		check_direction(x - i, y, directions_arr, 0);
+		check_direction(x + i, y, directions_arr, 1);
+		check_direction(x, y - i, directions_arr, 2);
+		check_direction(x, y + i, directions_arr, 3);
 	}
+}
+
+function check_direction(new_x, new_y, direction_matrix, dir_index) {
+	if (direction_matrix[dir_index] == 0 && ((new_x > 0 && new_x < 10) && (new_y > 0 && new_y < 10))) {
+    	fill_cell(new_x, new_y, direction_matrix, dir_index);
+    }
 }
 
 function fill_cell(a, b, dir_array, dir) { // coords. x and y the "directions" matrix and it's index - arrays get passed by reference
