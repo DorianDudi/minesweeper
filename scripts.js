@@ -144,9 +144,9 @@ function fill_cleared_cells(x, y) {
 	}
 }
 
-function check_direction(new_x, new_y, direction_matrix, dir_index) {
-	if (direction_matrix[dir_index] == 0 && ((new_x > 0 && new_x < 10) && (new_y > 0 && new_y < 10))) {
-    	fill_cell(new_x, new_y, direction_matrix, dir_index);
+function check_direction(new_x, new_y, dir_limit_array, dir_index) {
+	if (dir_limit_array[dir_index] == 0 && ((new_x > 0 && new_x < 10) && (new_y > 0 && new_y < 10))) {
+    	fill_cell(new_x, new_y, dir_limit_array, dir_index);
     }
 }
 
