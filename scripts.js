@@ -135,19 +135,17 @@ function user_wins() {	// checks if all empty cells have been cleared
 }
 
 function fill_cleared_cells(x, y) {
-	let directions_arr = [0, 0, 0, 0]; // up down left right
-	for (let i = 1; i <= 8; ++i) {
-		check_direction(x - i, y, directions_arr, 0);
-		check_direction(x + i, y, directions_arr, 1);
-		check_direction(x, y - i, directions_arr, 2);
-		check_direction(x, y + i, directions_arr, 3);
+	direction_flag = [0, 0, 0, 0];
+	direction_i = [-1, 1, 0, 0]; // up-down-left-right
+	direction_j = [0, 0, -1, 1];
+	for (let dir = 0; dir < direction_i.length; ++dir) {
+		let current_x = x + direction_i[dir], current_y = y + direction_j[dir];
+		while (game_matrix[current_x][current_y] >= 0 && direction_flag[dir] == 0) {
+			fill_cell(current_x, current_y, direction_flag, dir); 
+			current_x += direction_i[dir];
+			current_y += direction_j[dir];
+		}
 	}
-}
-
-function check_direction(new_x, new_y, dir_limit_array, dir_index) {
-	if (dir_limit_array[dir_index] == 0 && ((new_x > 0 && new_x < 10) && (new_y > 0 && new_y < 10))) {
-    	fill_cell(new_x, new_y, dir_limit_array, dir_index);
-    }
 }
 
 function fill_cell(a, b, dir_array, dir) { // coords. x and y the "directions" matrix and it's index - arrays get passed by reference
