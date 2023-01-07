@@ -17,7 +17,11 @@ function initialize_game_matrix() {
 	for (let i = 0; i <= 10; i++) {
 		game_matrix[i] = [];
 		for (let j = 0; j <= 10; j++) {
-			game_matrix[i][j] = 0;
+			if (i == 0 || i == 10 || j == 0 || j == 10) {
+				game_matrix[i][j] = -1;
+			} else {
+				game_matrix[i][j] = 0;
+			}
 		}
 	}
 }	// the above code declares and initializes the game matrix and the coordinate matrix
