@@ -7,19 +7,38 @@
 		<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<h1>MINESWEEPER</h1>
-		<h2>Clear all the cells by avoiding the 10 mines.</h2>
-		<br>
-		<h2>Click the icon below to start/reset game.</h2>
-		<br>
-		<div class="cell_unclicked">
-		    <img src="https://iili.io/Hxawbl2.png" onclick="restart_game()" border="0" width="32" height="32" id="game_on"/>
-		    <img src="https://iili.io/HxawZP4.png" onclick="restart_game()" border="0" width="32" height="32" id="game_over" hidden/>
-		    <img src="https://iili.io/HxawDKl.png" onclick="restart_game()" border="0" width="32" height="32" id="winner" hidden/>
-		</div>
-		<br>
-		<div id="game_grid">
-		</div>
+        <h1>- MINESWEEPER -</h1>
+        <div id="main_container">
+            <div id="grid_size_input">
+                <form >
+                    <h2>Choose the size of your game grid.</h2>
+                    <br>
+                    <h2>Pick values that range from 5 to 100:</h2>
+                    <br>
+                    <input type="text" id='grid_length' placeholder="length">
+                    <input type="text" id='grid_height' placeholder="height">
+                    <br>
+                    <br>
+                    <button type="button" id='start_game' onclick='startGame()'>START GAME!</button>
+                </form>
+            </div>
+            <div id="in_game_instructions" hidden>
+                <h2 id = "add_mines_count">Clear all the cells by avoiding the</h2>
+                <br>
+                <h2>Click the icon below to restart game or:<button type="button" id="resize_grid" onclick="resize_grid()">resize grid</button>.</h2>
+                <br>
+                <div id="game_icon" class="cell_unclicked">
+                    <img src="https://iili.io/Hxawbl2.png" onclick="restart_game()" border="0" width="28" height="28" id="game_on"/>
+                    <img src="https://iili.io/HxawZP4.png" onclick="restart_game()" border="0" width="28" height="28" id="game_over" hidden/>
+                    <img src="https://iili.io/HxawDKl.png" onclick="restart_game()" border="0" width="28" height="28" id="winner" hidden/>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div id="game_grid" hidden>
+
+            </div>
+        </div>
 		<script src="./scripts.js"></script>
 	</body>
 </html>

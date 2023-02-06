@@ -1,4 +1,4 @@
-body {
+body, #resize_grid {
    background-color: black;
    font-family: 'Press Start 2P', cursive;
 }
@@ -10,45 +10,96 @@ h1 {
 
 h2 {
     color: white;
-    margin: auto;
+    margin: 0;
     text-align: center;
     font-size:8px;
 }
 
+input, button {
+  text-align: center;
+  width: 60px;
+  height: 50px;
+}
+ 
+#resize_grid {
+  width: 110px;
+  height: 18px;
+  border: 3px solid orange;
+  border-radius: 3px;
+  padding: 0;
+  color: orange;
+  background-color: black;
+  font-size: 9px;
+}
+
+#resize_grid:hover {
+    background-color: orange;
+    color: black;
+}
+
 p {
-    margin: auto;
     text-align: center;
-    vertical-align: middle;
-    font-size: 22px;
-    width: 32px;
-    height: 32px;
-    padding-top: 10px;
+    font-size: 15px;
+    line-height: 1;
+    margin: auto;
+}
+
+#game_grid .cell_unclicked img{
+    height: 28px;
+    /*  background-color: pink; optional to show extent of element */
+    margin: auto;
+    display: table-cell;
+}
+
+h3 {
+    height: inherit;
+    margin: auto;
+    display: table-cell;
+    padding-left: 50%;
+    padding-top: 50%;
+}
+
+.cell_clicked img {
+  margin: auto;
+  display: block;
+  padding-top: 13%;
 }
 
 .cell_clicked {
-   width: 38px;
-   height: 38px;
+   text-align: center;
+   display: inline-block;
+   width: 36px;
+   height: 36px;
    border: 1px solid gray;
    background-color: silver;
+   margin: auto 0 auto 0;
 }
 
 .cell_unclicked {
+   display: inline-block;
    border: 4px solid gray;
    border-top-color: white;
    border-left-color: white;
-   width: 32px;
-   height: 32px;
+   width: 30px;
+   height: 30px;
    background-color: silver;
-   margin: auto;
+}
+
+#main_container {
+    display: block;
+    margin: auto;
+    text-align: center;
 }
 
 #game_grid {
-    display: grid;
-    grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px;
-    grid-template-rows: 40px 40px 40px 40px 40px 40px 40px 40px 40px;
-    width: 360px;
-    height: 360px;
-    margin: auto;
+    display: inline-block;
+    border: 5px solid gray;
+    border-top: 5px solid white;
+    border-left: 5px solid white;
+}
+
+
+.game_grid_border {
     border: 4px solid gray;
     border-top-color: silver;
     border-left-color: silver;
@@ -57,3 +108,4 @@ p {
 .cell_unclicked:active  {
    border-color: silver;
 }
+
