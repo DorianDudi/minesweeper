@@ -35,11 +35,11 @@ function startGame() {//
     grid_height = document.getElementById('grid_height').value;
     number_of_mines = Math.ceil(grid_length * grid_height / 10) + 1;
     //console.log(number_of_mines);
-    document.getElementById('add_mines_count').innerHTML += (' ' + Math.ceil(number_of_mines) + ' mines.');
-    if ((Number.isInteger(grid_length) && Number.isInteger(grid_height)) && grid_length == 0 || grid_height == 0 || grid_length < 5 || grid_height < 5 || grid_length > 40 || grid_height > 40) {
+    if (isNaN(grid_length) || isNaN(grid_height) || grid_length == 0 || grid_height == 0 || grid_length < 5 || grid_height < 5 || grid_length > 40 || grid_height > 40) {
     	//alert("enter values that range from 5 to 40");
         show_input_warning();
     } else {
+    	document.getElementById('add_mines_count').innerHTML += (' ' + Math.ceil(number_of_mines) + ' mines.');
     	document.getElementById("grid_size_input").setAttribute("hidden", "true");
         document.getElementById("in_game_instructions").removeAttribute("hidden");
     	restart_game();
