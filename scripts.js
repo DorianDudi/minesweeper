@@ -27,17 +27,18 @@ function initialize_game_matrix() {
             }
         }
     }
-    console.table(game_matrix);
+    //console.table(game_matrix);
 }	// the above code declares and initializes the game matrix and the coordinate matrix
 
 function startGame() {//
 	grid_length = document.getElementById('grid_length').value;
     grid_height = document.getElementById('grid_height').value;
     number_of_mines = Math.ceil(grid_length * grid_height / 10) + 1;
-    console.log(number_of_mines);
+    //console.log(number_of_mines);
     document.getElementById('add_mines_count').innerHTML += (' ' + Math.ceil(number_of_mines) + ' mines.');
-    if (grid_length == 0 || grid_height == 0 || grid_length < 5 || grid_height < 5 || grid_length > 40 || grid_height > 40) {
-    	alert("enter values that range from 5 to 40");
+    if ((Number.isInteger(grid_length) && Number.isInteger(grid_height)) && grid_length == 0 || grid_height == 0 || grid_length < 5 || grid_height < 5 || grid_length > 40 || grid_height > 40) {
+    	//alert("enter values that range from 5 to 40");
+        show_input_warning();
     } else {
     	document.getElementById("grid_size_input").setAttribute("hidden", "true");
         document.getElementById("in_game_instructions").removeAttribute("hidden");
@@ -51,8 +52,8 @@ function restart_game() { // resets the HTML and adds new values in the matrices
     generate_mine_coordinates(number_of_mines);
     generate_game(number_of_mines);
     generate_game_grid();
-	console.table(mine_coordinates);
-	console.table(game_matrix);
+	//console.table(mine_coordinates);
+	//console.table(game_matrix);
 	document.getElementById("game_over").hidden = true;
 	document.getElementById("winner").hidden = true;
 	document.getElementById("game_on").hidden = false;
@@ -86,6 +87,12 @@ function add_cell(line, col) {
     if (col == grid_length) {
 		document.getElementById('game_grid').innerHTML += "<br>";
     }
+}
+
+function show_input_warning() {
+	document.getElementById("input_warning").removeAttribute("hidden");
+    setTimeout(() => {document.getElementById("input_warning").setAttribute("hidden", "true")}, 5000);
+    //setTimeout(() => {console.log("this is the third message")}, 1000);
 }
 
 function getRandomIntInclusive(min, max) {
@@ -158,9 +165,9 @@ function reveal_cell(elem_id) {		// reveals contents of clicked cells by calling
         	y = y * 10 + parseInt(current_char);
         }
     }
-    console.log(elem_id);
-    console.log(x);
-    console.log(y);
+    //console.log(elem_id);
+    //console.log(x);
+    //console.log(y);
     let cell_value = game_matrix[x][y];
 	if (cell_value > 0) {
 		update_HTML_ID(x, y, cell_value);	// display number value in cell or...
